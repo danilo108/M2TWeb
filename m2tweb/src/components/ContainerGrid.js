@@ -2,6 +2,7 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import ContainerCard from './ContainerCard'
 import { Typography } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
 export default class ContainerGrid extends React.Component {
     constructor(props) {
         super(props)
@@ -15,18 +16,18 @@ export default class ContainerGrid extends React.Component {
         this.setState({ loadingState: "sending request " })
         fetch("http://localhost:8080/webapi/containers ").then(json => {
             let payload = json.json()
-            console.log(payload)
+            // console.log(payload)
             this.setState({ isLoading: true, loadingState: "Request received " + payload })
             return payload
         }).then(resp => {
-            console.log(resp)
+            // console.log(resp)
                 this.setState({ containers: resp['entities'], isLoading: false })
             })
     }
     render = () => {
-        console.log(this.state.containers)
+        // console.log(this.state.containers)
         const containers = this.state.containers;
-        let result = <Typography >{this.state.loadingState}</Typography>
+        let result = <div class="centeredDiv"><CircularProgress color="secondary"/><Typography noWrap>{this.state.loadingState}</Typography></div>
         if (!this.state.isLoading) {
             result = (
                 <Grid container spacing={24}>
