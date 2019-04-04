@@ -42,6 +42,7 @@ export default class ContainerGrid extends React.Component {
                 this.setState({ containers: resp['entities'], isLoading: false, pageTotal:resp['totalPages'] })
             }).catch(e=>{
                 console.log(e)
+                this.setState({loadingState:"Ooops! " + JSON.stringify(e)})
             })
     }
     componentWillMount = () =>{
