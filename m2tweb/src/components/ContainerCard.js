@@ -183,7 +183,7 @@ class ContainerCard extends Component {
 
         return (
             <Card className={classes.card} >
-                <CardHeader title={containerNumber}  subheader={originalFileName} action={(<Button onClick={this.openDanger}>!!! <ExpandMoreIcon   /></Button>)} />
+                <CardHeader color="primary" title={containerNumber}  subheader={originalFileName} action={(<Button onClick={this.openDanger}>!!! <ExpandMoreIcon   /></Button>)} />
                 <CardContent>
                     
                     {
@@ -232,7 +232,7 @@ class ContainerCard extends Component {
                     
                     size="small"
                     color="primary"
-                    
+                    variant="outlined"
                     className={classes.margin} 
                     onClick={this.updateFromSpreadSheet}
                     >Get updates
@@ -240,7 +240,8 @@ class ContainerCard extends Component {
                    { ( numberOfConfirmedDockets === numberOfOriginalDockets) && (<Button
                     
                     size="small"
-                    color="secondary"
+                    color="primary"
+                    variant="outlined"
                     
                     className={classes.margin} 
                      onClick={this.generateReport}>Generate report</Button>)}
