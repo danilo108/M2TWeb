@@ -4,9 +4,15 @@ import ContainerCard from './ContainerCard'
 import { Typography, Button } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MobileStepper from '@material-ui/core/MobileStepper'
-
-
-export default class ContainerGrid extends React.Component {
+import Paper from '@material-ui/core/Paper'
+import { withStyles } from '@material-ui/core/styles';
+const styles = theme => ({
+    root: {
+    //    maxWidth: 1300,
+      flexGrow: 1,
+    },
+  });
+class ContainerGrid extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -51,16 +57,21 @@ export default class ContainerGrid extends React.Component {
     //     this.fetchContainers()
     // }
     render = () => {
+        const { classes, theme } = this.props;
         // console.log(this.state.containers)
         const containers = this.state.containers;
         let result = <div className="centeredDiv"><CircularProgress color="secondary"/><Typography noWrap>{this.state.loadingState}</Typography></div>
         if (!this.state.isLoading) {
             result = (
-                <div>
+                <div className={classes.root}>
+                <Paper>
 
-                <Grid container spacing={24}>
+                <Grid container spacing={24}  direction="row"
+                        justify="space-between"
+                        alignItems="flex-start" >
                     {containers.map(c => (
-                        <Grid item key={c.containerId}>
+                        <Grid item key={c.containerId}  
+                        >
                             <ContainerCard
                                 containerNumber={c.containerNumber}
                                 originalFileName={c.originalFileName}
@@ -80,6 +91,7 @@ export default class ContainerGrid extends React.Component {
                         </Grid>)
                     )}
                 </Grid>
+                </Paper>
                 <MobileStepper position="static" steps={this.state.pageTotal} activeStep={this.state.currentPageNumber} 
                     backButton={
                         <Button size="small" onClick={this.goPageBack} disabled={this.state.currentPageNumber < 1} >Back</Button>
@@ -87,8 +99,9 @@ export default class ContainerGrid extends React.Component {
                     nextButton={
                         <Button size="small" onClick={this.goPageNext} disabled={this.state.currentPageNumber >= this.state.pageTotal -1}>Next</Button>
                     }
+                    className={classes.mobileStepper}
                 />
-                    </div>
+                </div>
             )
         }
         /*
@@ -98,3 +111,5 @@ export default class ContainerGrid extends React.Component {
 
     }
 }
+
+export default withStyles(styles, { withTheme: true })(ContainerGrid)   

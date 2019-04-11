@@ -40,3 +40,16 @@
     transform: translateX(-50%) translateY(-50%);
     text-align: center;   
 }
+
+.progressDivContainer{
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  
+}
+
+.progressDivContent{
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+}
